@@ -2,13 +2,13 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from fastapi import HTTPException
-from app.config import GEMINI_API_KEY, LLM_MODEL
+from app.config import GOOGLE_API_KEY, LLM_MODEL
 
 
 # Initialize the chat model
 llm = init_chat_model(
     LLM_MODEL,
-    api_key=GEMINI_API_KEY,
+    api_key=GOOGLE_API_KEY,
     )
 
 prompt = ChatPromptTemplate.from_messages(
