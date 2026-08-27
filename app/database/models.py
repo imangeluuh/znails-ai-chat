@@ -10,6 +10,8 @@ class Category(str, Enum):
     SOFTGEL = "Softgel"
     GEL = "Gel"
     BIAB = "BIAB"
+    REMOVAL = "Removal"
+    ADD_ONS = "Add-Ons"
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -67,6 +69,6 @@ class Service(Base):
     name: Mapped[str] = mapped_column(String(225), nullable=False)
     category: Mapped[Category] = mapped_column(SAEnum(Category), nullable=False, index=True)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    duration: Mapped[int] = mapped_column(Integer, nullable=False)
+    duration: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(UTC))
