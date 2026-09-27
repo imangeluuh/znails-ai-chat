@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(340 15% 12%);
+
+  --color-muted: hsl(30 20% 95%);
+  --color-muted-foreground: hsl(340 8% 45%);
+
+  --color-blush-100: #f9e4e7;
+  --color-blush-200: #D9B2B2;
+  --color-blush-500: #D99CAB;
+
+  --font-display: 'Dela Gothic One', cursive;
+  --font-serif: 'Inria Serif', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Inconsolata', monospace;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  --background: 340 20% 96%;
+  --foreground: 300 10% 20%;
+  --primary: 300 10% 20%;
+  --primary-foreground: 0 0% 100%;
+  --border: 340 15% 85%;
+  --radius: 0.5rem;
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
