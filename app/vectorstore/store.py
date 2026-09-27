@@ -13,7 +13,8 @@ COLLECTION_NAME = "znails_knowledge_base"
 def _get_embedding() -> GoogleGenerativeAIEmbeddings:
     return GoogleGenerativeAIEmbeddings(
         model=EMBEDDING_MODEL,
-        api_key=GOOGLE_API_KEY
+        google_api_key=GOOGLE_API_KEY,
+        max_retries=3,
     )
 
 def build_vectorstore() -> Chroma:
