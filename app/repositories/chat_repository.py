@@ -1,10 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from fastapi import HTTPException
 from app.database.models import Conversation, Message
 
 def get_or_create_conversation(db: Session, session_id: str) -> Conversation:
-    stmt = select(Conversation)
+    stmt = select(Conversation).where(Conversation.session_id == session_id)
     conversation = db.scalars(stmt).first()
 
     if not conversation:
@@ -29,11 +28,10 @@ def add_message(db: Session, conversation_id: int, role: str, content: str, mode
 
     return message
 
-def get_history(db: Session, session_id: int) -> list[Message]:
-    stmt = select(Conversation).where(Conversation.session_id == session_id).order_by(Message.created_at)
-    conversation = db.scalars(stmt).first()
-
-    if not conversation:
-        raise HTTPException(status_code=404, detail="Chat history not found")
-    
-    return conversation
+def get_history(db: Session, conversation_id: int) -> list[Message]:
+    stmt = (
+        select(Message)
+        .where(Message.conversation_id == conversation_id)
+        .order_by(Message.created_at)
+    )
+    return list(db.scalars(stmt).all())
